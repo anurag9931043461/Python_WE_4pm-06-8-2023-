@@ -1,0 +1,71 @@
+Advance IDLEs:
+--------------
+> visual studio code (Microsoft), open source
+> anaconda(jupyter lab)
+> pycharm (JetBrain, open source/community version/free, professional paid)
+------------------------------------------------------------------------------
+> introduction 
+> variable 
+> comment 
+> datatype
+    > int 
+    > float
+    > string
+    > list
+    > tuple
+    > set 
+    > dictionary
+    > frozenset
+    > complex
+    > boolean
+> input()
+> casting
+> operators
+> conditional programming 
+    > if else
+        > nested if else
+    > if elif else
+        > nested if elif else
+    > ternary operator
+> loop
+    > for loop 
+        > nest for loop
+        > list comprehension 
+        > dictionary comprehension
+        > set comprehension
+        > frozenset comprehension
+        > tuple comprehension(generator object)
+        > pattern 
+    > while loop
+        > nested while loop
+        > pattern using single loop
+        > pattern using nested loop
+
+> function 
+    > def 
+        > nested function(decorator)
+        > generator
+    > lambda
+        > annonymous function / fat function 
+    
+> Multiasking/threading 
+>Exception handling 
+> Regular expression regex
+> OOPs
+    > Class(Blueprint)
+    > object
+    > Encapsulation 
+    > Inheritance
+    > Polymorphism
+    > Abstraction (Blueprint of project)
+    > class function 
+    > static function 
+    > class variable 
+
+> SQL:
+    > Mysql
+        > Create Read update delete(CRUD)
+> NoSQL 
+    > MongoDB (CRUD)
+
+Project: Module(Regex)
