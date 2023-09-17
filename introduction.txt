@@ -51,8 +51,19 @@ Advance IDLEs:
 > Multiasking/threading 
 >Exception handling 
 > Regular expression regex
+
+> Programming Paradigm:
+    > Top line programming
+    > Procedural programming/functional programming
+    > object Oriented programming
 > OOPs
     > Class(Blueprint)
+        > instance variable
+        > constructor(def __init__(self))
+        > self keyword
+        > class variable
+        > class methods
+        > static methods.
     > object
     > Encapsulation 
     > Inheritance
