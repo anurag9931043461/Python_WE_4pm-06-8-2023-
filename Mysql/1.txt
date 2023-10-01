@@ -1,0 +1,231 @@
+mysql> -- system cls; to clear a screen
+mysql> -- show databases;  to see all schema or databases.
+mysql> -- show tables; to see all tables of a batabase.
+mysql> -- create database database_name; to create a new database
+mysql> -- create table table_name; to create new table.
+mysql> -- select * from table_name; to see all records/tuple/row/observation/sample of a table.
+mysql> -- where clause, and , or, between keywords.
+mysql> -- order by, limit
+mysql>
+mysql>
+mysql>
+mysql>
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| we10               |
+| we2                |
+| world              |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> create database we4;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> sjpw databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'sjpw databases' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| we10               |
+| we2                |
+| we4                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> -- sql language is not a case sensitive language. example: select , SeleCT
+mysql> use we4;
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> create table garibo_Ka_starbucks(sn int, name varchar(50),amount float);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++---------------------+
+| Tables_in_we4       |
++---------------------+
+| garibo_ka_starbucks |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into garibo_ka_starbucks values(1,'anshika',5.50);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into garibo_ka_starbucks values(2,'Ravi Teja',56.00),(3,'Daaga',43.54),(4,"Mugambo",43.56);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from garibo_ka_starbucks;
++------+-----------+--------+
+| sn   | name      | amount |
++------+-----------+--------+
+|    1 | anshika   |    5.5 |
+|    2 | Ravi Teja |     56 |
+|    3 | Daaga     |  43.54 |
+|    4 | Mugambo   |  43.56 |
++------+-----------+--------+
+4 rows in set (0.00 sec)
+
+mysql> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| we10               |
+| we2                |
+| we4                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> use we4;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_we4       |
++---------------------+
+| garibo_ka_starbucks |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> desc garibo_ka_starbucks;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| sn     | int         | YES  |     | NULL    |       |
+| name   | varchar(50) | YES  |     | NULL    |       |
+| amount | float       | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from garibo_ka_starbucks;
++------+-----------+--------+
+| sn   | name      | amount |
++------+-----------+--------+
+|    1 | anshika   |    5.5 |
+|    2 | Ravi Teja |     56 |
+|    3 | Daaga     |  43.54 |
+|    4 | Mugambo   |  43.56 |
++------+-----------+--------+
+4 rows in set (0.00 sec)
+
+mysql> insert into garibo_ka_starbucks(5,"Krishna",1.43),(6,"Mohan",3.43),(7,"Anuradha",4.32);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '5,"Krishna",1.43),(6,"Mohan",3.43),(7,"Anuradha",4.32)' at line 1
+mysql> insert into garibo_ka_starbucks values(5,"Krishna",1.43),(6,"Mohan",3.43),(7,"Anuradha",4.32);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> insert into garibo_ka_starbucks(name,amount) values("Krishna",1.43);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from garibo_ka_starbucks;
++------+-----------+--------+
+| sn   | name      | amount |
++------+-----------+--------+
+|    1 | anshika   |    5.5 |
+|    2 | Ravi Teja |     56 |
+|    3 | Daaga     |  43.54 |
+|    4 | Mugambo   |  43.56 |
+|    5 | Krishna   |   1.43 |
+|    6 | Mohan     |   3.43 |
+|    7 | Anuradha  |   4.32 |
+| NULL | Krishna   |   1.43 |
++------+-----------+--------+
+8 rows in set (0.00 sec)
+
+mysql> insert into garibo_ka_starbucks(sn,name) values(8,"Suraj");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from garibo_ka_starbucks;
++------+-----------+--------+
+| sn   | name      | amount |
++------+-----------+--------+
+|    1 | anshika   |    5.5 |
+|    2 | Ravi Teja |     56 |
+|    3 | Daaga     |  43.54 |
+|    4 | Mugambo   |  43.56 |
+|    5 | Krishna   |   1.43 |
+|    6 | Mohan     |   3.43 |
+|    7 | Anuradha  |   4.32 |
+| NULL | Krishna   |   1.43 |
+|    8 | Suraj     |   NULL |
++------+-----------+--------+
+9 rows in set (0.00 sec)
+
+mysql> insert into garibo_ka_starbucks(sn,amount) values(10,31312.43243);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from garibo_ka_starbucks;
++------+-----------+---------+
+| sn   | name      | amount  |
++------+-----------+---------+
+|    1 | anshika   |     5.5 |
+|    2 | Ravi Teja |      56 |
+|    3 | Daaga     |   43.54 |
+|    4 | Mugambo   |   43.56 |
+|    5 | Krishna   |    1.43 |
+|    6 | Mohan     |    3.43 |
+|    7 | Anuradha  |    4.32 |
+| NULL | Krishna   |    1.43 |
+|    8 | Suraj     |    NULL |
+|   10 | NULL      | 31312.4 |
++------+-----------+---------+
+10 rows in set (0.00 sec)
+
+mysql> -- aggrigate function(avg(),sum(),count(),distinct(),min(),max())
+mysql> select sum(amount) from garibo_ka_starbucks;
++--------------------+
+| sum(amount)        |
++--------------------+
+| 31471.641643047333 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(amount) from garibo_ka_starbucks;
++-------------------+
+| avg(amount)       |
++-------------------+
+| 3496.849071449704 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select min(amount) from garibo_ka_starbucks;
++-------------+
+| min(amount) |
++-------------+
+|        1.43 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> -- nested query
+mysql> select * from garibo_ka_starbucks where amount in(select min(amount) from garibo_ka_starbucks);
++------+---------+--------+
+| sn   | name    | amount |
++------+---------+--------+
+|    5 | Krishna |   1.43 |
+| NULL | Krishna |   1.43 |
++------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql>
