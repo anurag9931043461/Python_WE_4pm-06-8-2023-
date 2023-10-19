@@ -1,0 +1,780 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| wd12               |
+| wd2                |
+| wd5                |
+| wd7                |
+| we10               |
+| we2                |
+| we4                |
+| world              |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql> use we4;
+Database changed
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| wd12               |
+| wd2                |
+| wd5                |
+| wd7                |
+| we10               |
+| we2                |
+| we4                |
+| world              |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql> use we4;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_we4       |
++---------------------+
+| garibo_ka_starbucks |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from garibo_ka_starbucks;
++------+-----------+---------+
+| sn   | name      | amount  |
++------+-----------+---------+
+|    1 | anshika   |     5.5 |
+|    2 | Ravi Teja |      56 |
+|    3 | Daaga     |   43.54 |
+|    4 | Mugambo   |   43.56 |
+|    5 | Krishna   |    1.43 |
+|    6 | Mohan     |    3.43 |
+|    7 | Anuradha  |    4.32 |
+| NULL | Krishna   |    1.43 |
+|    8 | Suraj     |    NULL |
+|   10 | NULL      | 31312.4 |
++------+-----------+---------+
+10 rows in set (0.01 sec)
+
+mysql> alter table garibo_ka_starbucks new gks;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'new gks' at line 1
+mysql> alter table garibo_ka_starbucks renew gks;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'renew gks' at line 1
+mysql> alter table garibo_ka_starbucks rename gks;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_we4 |
++---------------+
+| gks           |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> -- update, alter, where , and , or, wildcard, like, alies,aggregate
+mysql> select * from gks;
++------+-----------+---------+
+| sn   | name      | amount  |
++------+-----------+---------+
+|    1 | anshika   |     5.5 |
+|    2 | Ravi Teja |      56 |
+|    3 | Daaga     |   43.54 |
+|    4 | Mugambo   |   43.56 |
+|    5 | Krishna   |    1.43 |
+|    6 | Mohan     |    3.43 |
+|    7 | Anuradha  |    4.32 |
+| NULL | Krishna   |    1.43 |
+|    8 | Suraj     |    NULL |
+|   10 | NULL      | 31312.4 |
++------+-----------+---------+
+10 rows in set (0.00 sec)
+
+mysql> update gks set sn=11 where name="Krishna" and sn !=5;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+
+| sn   | name      | amount  |
++------+-----------+---------+
+|    1 | anshika   |     5.5 |
+|    2 | Ravi Teja |      56 |
+|    3 | Daaga     |   43.54 |
+|    4 | Mugambo   |   43.56 |
+|    5 | Krishna   |    1.43 |
+|    6 | Mohan     |    3.43 |
+|    7 | Anuradha  |    4.32 |
+| NULL | Krishna   |    1.43 |
+|    8 | Suraj     |    NULL |
+|   10 | NULL      | 31312.4 |
++------+-----------+---------+
+10 rows in set (0.00 sec)
+
+mysql> update gks set sn=11 where name="Krishna" and sn<>5;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+
+| sn   | name      | amount  |
++------+-----------+---------+
+|    1 | anshika   |     5.5 |
+|    2 | Ravi Teja |      56 |
+|    3 | Daaga     |   43.54 |
+|    4 | Mugambo   |   43.56 |
+|    5 | Krishna   |    1.43 |
+|    6 | Mohan     |    3.43 |
+|    7 | Anuradha  |    4.32 |
+| NULL | Krishna   |    1.43 |
+|    8 | Suraj     |    NULL |
+|   10 | NULL      | 31312.4 |
++------+-----------+---------+
+10 rows in set (0.00 sec)
+
+mysql> update gks set sn=11 where name="Krishna", sn<>5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', sn<>5' at line 1
+mysql> update gks set sn=11 where name="Krishna" or sn<>5;
+Query OK, 10 rows affected (0.01 sec)
+Rows matched: 10  Changed: 10  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+
+| sn   | name      | amount  |
++------+-----------+---------+
+|   11 | anshika   |     5.5 |
+|   11 | Ravi Teja |      56 |
+|   11 | Daaga     |   43.54 |
+|   11 | Mugambo   |   43.56 |
+|   11 | Krishna   |    1.43 |
+|   11 | Mohan     |    3.43 |
+|   11 | Anuradha  |    4.32 |
+|   11 | Krishna   |    1.43 |
+|   11 | Suraj     |    NULL |
+|   11 | NULL      | 31312.4 |
++------+-----------+---------+
+10 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from gks;
++------+-----------+---------+
+| sn   | name      | amount  |
++------+-----------+---------+
+|   11 | anshika   |     5.5 |
+|   11 | Ravi Teja |      56 |
+|   11 | Daaga     |   43.54 |
+|   11 | Mugambo   |   43.56 |
+|   11 | Krishna   |    1.43 |
+|   11 | Mohan     |    3.43 |
+|   11 | Anuradha  |    4.32 |
+|   11 | Krishna   |    1.43 |
+|   11 | Suraj     |    NULL |
+|   11 | NULL      | 31312.4 |
++------+-----------+---------+
+10 rows in set (0.00 sec)
+
+mysql> update gks set sn=1 where name ="anshika";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update gks set sn=1 where name ="Ravi Teja";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update gks set sn=2 where name ="Ravi Teja";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update gks set sn=3 where name ="Daaga";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update gks set sn=4 where name ="Mugambo";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update gks set sn=5 where name ="Krishna";
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> update gks set sn=6 where name ="Mohan";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update gks set sn=7 where name ="Anuradha";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update gks set sn=8 where name ="Suraj";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+
+| sn   | name      | amount  |
++------+-----------+---------+
+|    1 | anshika   |     5.5 |
+|    2 | Ravi Teja |      56 |
+|    3 | Daaga     |   43.54 |
+|    4 | Mugambo   |   43.56 |
+|    5 | Krishna   |    1.43 |
+|    6 | Mohan     |    3.43 |
+|    7 | Anuradha  |    4.32 |
+|    5 | Krishna   |    1.43 |
+|    8 | Suraj     |    NULL |
+|   11 | NULL      | 31312.4 |
++------+-----------+---------+
+10 rows in set (0.00 sec)
+
+mysql> drop table gks where sn=5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where sn=5' at line 1
+mysql> delete table gks where sn=5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table gks where sn=5' at line 1
+mysql> delete from gks where sn=5;
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> select * from gks;
++------+-----------+---------+
+| sn   | name      | amount  |
++------+-----------+---------+
+|    1 | anshika   |     5.5 |
+|    2 | Ravi Teja |      56 |
+|    3 | Daaga     |   43.54 |
+|    4 | Mugambo   |   43.56 |
+|    6 | Mohan     |    3.43 |
+|    7 | Anuradha  |    4.32 |
+|    8 | Suraj     |    NULL |
+|   11 | NULL      | 31312.4 |
++------+-----------+---------+
+8 rows in set (0.00 sec)
+
+mysql> update gks set amount=11.45 where name="Suraj";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+
+| sn   | name      | amount  |
++------+-----------+---------+
+|    1 | anshika   |     5.5 |
+|    2 | Ravi Teja |      56 |
+|    3 | Daaga     |   43.54 |
+|    4 | Mugambo   |   43.56 |
+|    6 | Mohan     |    3.43 |
+|    7 | Anuradha  |    4.32 |
+|    8 | Suraj     |   11.45 |
+|   11 | NULL      | 31312.4 |
++------+-----------+---------+
+8 rows in set (0.00 sec)
+
+mysql> update gks set name="Ritu" where sn=11;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+
+| sn   | name      | amount  |
++------+-----------+---------+
+|    1 | anshika   |     5.5 |
+|    2 | Ravi Teja |      56 |
+|    3 | Daaga     |   43.54 |
+|    4 | Mugambo   |   43.56 |
+|    6 | Mohan     |    3.43 |
+|    7 | Anuradha  |    4.32 |
+|    8 | Suraj     |   11.45 |
+|   11 | Ritu      | 31312.4 |
++------+-----------+---------+
+8 rows in set (0.00 sec)
+
+mysql> alter table gks add gst float;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+------+
+| sn   | name      | amount  | gst  |
++------+-----------+---------+------+
+|    1 | anshika   |     5.5 | NULL |
+|    2 | Ravi Teja |      56 | NULL |
+|    3 | Daaga     |   43.54 | NULL |
+|    4 | Mugambo   |   43.56 | NULL |
+|    6 | Mohan     |    3.43 | NULL |
+|    7 | Anuradha  |    4.32 | NULL |
+|    8 | Suraj     |   11.45 | NULL |
+|   11 | Ritu      | 31312.4 | NULL |
++------+-----------+---------+------+
+8 rows in set (0.00 sec)
+
+mysql> select 100+100*0.18;
++--------------+
+| 100+100*0.18 |
++--------------+
+|       118.00 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> update gks set gst=amount+amount*0.18;
+Query OK, 8 rows affected (0.01 sec)
+Rows matched: 8  Changed: 8  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+---------+
+| sn   | name      | amount  | gst     |
++------+-----------+---------+---------+
+|    1 | anshika   |     5.5 |    6.49 |
+|    2 | Ravi Teja |      56 |   66.08 |
+|    3 | Daaga     |   43.54 | 51.3772 |
+|    4 | Mugambo   |   43.56 | 51.4008 |
+|    6 | Mohan     |    3.43 |  4.0474 |
+|    7 | Anuradha  |    4.32 |  5.0976 |
+|    8 | Suraj     |   11.45 |  13.511 |
+|   11 | Ritu      | 31312.4 | 36948.7 |
++------+-----------+---------+---------+
+8 rows in set (0.00 sec)
+
+mysql> update gks set gst=Null;
+Query OK, 8 rows affected (0.01 sec)
+Rows matched: 8  Changed: 8  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+------+
+| sn   | name      | amount  | gst  |
++------+-----------+---------+------+
+|    1 | anshika   |     5.5 | NULL |
+|    2 | Ravi Teja |      56 | NULL |
+|    3 | Daaga     |   43.54 | NULL |
+|    4 | Mugambo   |   43.56 | NULL |
+|    6 | Mohan     |    3.43 | NULL |
+|    7 | Anuradha  |    4.32 | NULL |
+|    8 | Suraj     |   11.45 | NULL |
+|   11 | Ritu      | 31312.4 | NULL |
++------+-----------+---------+------+
+8 rows in set (0.00 sec)
+
+mysql> update gks set amount=amount*0.18 where bill>50;
+ERROR 1054 (42S22): Unknown column 'bill' in 'where clause'
+mysql> update gks set amount=amount*0.18 where amount>50;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * gks;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'gks' at line 1
+mysql> select * from gks;
++------+-----------+---------+------+
+| sn   | name      | amount  | gst  |
++------+-----------+---------+------+
+|    1 | anshika   |     5.5 | NULL |
+|    2 | Ravi Teja |   10.08 | NULL |
+|    3 | Daaga     |   43.54 | NULL |
+|    4 | Mugambo   |   43.56 | NULL |
+|    6 | Mohan     |    3.43 | NULL |
+|    7 | Anuradha  |    4.32 | NULL |
+|    8 | Suraj     |   11.45 | NULL |
+|   11 | Ritu      | 5636.24 | NULL |
++------+-----------+---------+------+
+8 rows in set (0.00 sec)
+
+mysql> update gks set gst=amount*0.18 where amount>50;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+---------+
+| sn   | name      | amount  | gst     |
++------+-----------+---------+---------+
+|    1 | anshika   |     5.5 |    NULL |
+|    2 | Ravi Teja |   10.08 |    NULL |
+|    3 | Daaga     |   43.54 |    NULL |
+|    4 | Mugambo   |   43.56 |    NULL |
+|    6 | Mohan     |    3.43 |    NULL |
+|    7 | Anuradha  |    4.32 |    NULL |
+|    8 | Suraj     |   11.45 |    NULL |
+|   11 | Ritu      | 5636.24 | 1014.52 |
++------+-----------+---------+---------+
+8 rows in set (0.00 sec)
+
+mysql> update gks set gst=amount*0.18 where amount>20;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 3  Changed: 2  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+---------+
+| sn   | name      | amount  | gst     |
++------+-----------+---------+---------+
+|    1 | anshika   |     5.5 |    NULL |
+|    2 | Ravi Teja |   10.08 |    NULL |
+|    3 | Daaga     |   43.54 |  7.8372 |
+|    4 | Mugambo   |   43.56 |  7.8408 |
+|    6 | Mohan     |    3.43 |    NULL |
+|    7 | Anuradha  |    4.32 |    NULL |
+|    8 | Suraj     |   11.45 |    NULL |
+|   11 | Ritu      | 5636.24 | 1014.52 |
++------+-----------+---------+---------+
+8 rows in set (0.00 sec)
+
+mysql> update gks set gst=0 where amount<20;
+Query OK, 5 rows affected (0.01 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from gksl
+    -> ;
+ERROR 1146 (42S02): Table 'we4.gksl' doesn't exist
+mysql> select * from gks;
++------+-----------+---------+---------+
+| sn   | name      | amount  | gst     |
++------+-----------+---------+---------+
+|    1 | anshika   |     5.5 |       0 |
+|    2 | Ravi Teja |   10.08 |       0 |
+|    3 | Daaga     |   43.54 |  7.8372 |
+|    4 | Mugambo   |   43.56 |  7.8408 |
+|    6 | Mohan     |    3.43 |       0 |
+|    7 | Anuradha  |    4.32 |       0 |
+|    8 | Suraj     |   11.45 |       0 |
+|   11 | Ritu      | 5636.24 | 1014.52 |
++------+-----------+---------+---------+
+8 rows in set (0.00 sec)
+
+mysql> alter table gks add total_bill float;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+---------+------------+
+| sn   | name      | amount  | gst     | total_bill |
++------+-----------+---------+---------+------------+
+|    1 | anshika   |     5.5 |       0 |       NULL |
+|    2 | Ravi Teja |   10.08 |       0 |       NULL |
+|    3 | Daaga     |   43.54 |  7.8372 |       NULL |
+|    4 | Mugambo   |   43.56 |  7.8408 |       NULL |
+|    6 | Mohan     |    3.43 |       0 |       NULL |
+|    7 | Anuradha  |    4.32 |       0 |       NULL |
+|    8 | Suraj     |   11.45 |       0 |       NULL |
+|   11 | Ritu      | 5636.24 | 1014.52 |       NULL |
++------+-----------+---------+---------+------------+
+8 rows in set (0.00 sec)
+
+mysql> update gks total_bill=amount+gst;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=amount+gst' at line 1
+mysql> update gks set total_bill=amount+gst;
+Query OK, 8 rows affected (0.01 sec)
+Rows matched: 8  Changed: 8  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+---------+------------+
+| sn   | name      | amount  | gst     | total_bill |
++------+-----------+---------+---------+------------+
+|    1 | anshika   |     5.5 |       0 |        5.5 |
+|    2 | Ravi Teja |   10.08 |       0 |      10.08 |
+|    3 | Daaga     |   43.54 |  7.8372 |    51.3772 |
+|    4 | Mugambo   |   43.56 |  7.8408 |    51.4008 |
+|    6 | Mohan     |    3.43 |       0 |       3.43 |
+|    7 | Anuradha  |    4.32 |       0 |       4.32 |
+|    8 | Suraj     |   11.45 |       0 |      11.45 |
+|   11 | Ritu      | 5636.24 | 1014.52 |    6650.76 |
++------+-----------+---------+---------+------------+
+8 rows in set (0.00 sec)
+
+mysql> alter table gks add child_feed float;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+---------+------------+------------+
+| sn   | name      | amount  | gst     | total_bill | child_feed |
++------+-----------+---------+---------+------------+------------+
+|    1 | anshika   |     5.5 |       0 |        5.5 |       NULL |
+|    2 | Ravi Teja |   10.08 |       0 |      10.08 |       NULL |
+|    3 | Daaga     |   43.54 |  7.8372 |    51.3772 |       NULL |
+|    4 | Mugambo   |   43.56 |  7.8408 |    51.4008 |       NULL |
+|    6 | Mohan     |    3.43 |       0 |       3.43 |       NULL |
+|    7 | Anuradha  |    4.32 |       0 |       4.32 |       NULL |
+|    8 | Suraj     |   11.45 |       0 |      11.45 |       NULL |
+|   11 | Ritu      | 5636.24 | 1014.52 |    6650.76 |       NULL |
++------+-----------+---------+---------+------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> update gks set child_feed=2 where total_bill>20;
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+---------+------------+------------+
+| sn   | name      | amount  | gst     | total_bill | child_feed |
++------+-----------+---------+---------+------------+------------+
+|    1 | anshika   |     5.5 |       0 |        5.5 |       NULL |
+|    2 | Ravi Teja |   10.08 |       0 |      10.08 |       NULL |
+|    3 | Daaga     |   43.54 |  7.8372 |    51.3772 |          2 |
+|    4 | Mugambo   |   43.56 |  7.8408 |    51.4008 |          2 |
+|    6 | Mohan     |    3.43 |       0 |       3.43 |       NULL |
+|    7 | Anuradha  |    4.32 |       0 |       4.32 |       NULL |
+|    8 | Suraj     |   11.45 |       0 |      11.45 |       NULL |
+|   11 | Ritu      | 5636.24 | 1014.52 |    6650.76 |          2 |
++------+-----------+---------+---------+------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> update gks set child_feed=10000 where sn=11;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+---------+------------+------------+
+| sn   | name      | amount  | gst     | total_bill | child_feed |
++------+-----------+---------+---------+------------+------------+
+|    1 | anshika   |     5.5 |       0 |        5.5 |       NULL |
+|    2 | Ravi Teja |   10.08 |       0 |      10.08 |       NULL |
+|    3 | Daaga     |   43.54 |  7.8372 |    51.3772 |          2 |
+|    4 | Mugambo   |   43.56 |  7.8408 |    51.4008 |          2 |
+|    6 | Mohan     |    3.43 |       0 |       3.43 |       NULL |
+|    7 | Anuradha  |    4.32 |       0 |       4.32 |       NULL |
+|    8 | Suraj     |   11.45 |       0 |      11.45 |       NULL |
+|   11 | Ritu      | 5636.24 | 1014.52 |    6650.76 |      10000 |
++------+-----------+---------+---------+------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> update gks set child_feed=-2 where sn=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+---------+------------+------------+
+| sn   | name      | amount  | gst     | total_bill | child_feed |
++------+-----------+---------+---------+------------+------------+
+|    1 | anshika   |     5.5 |       0 |        5.5 |         -2 |
+|    2 | Ravi Teja |   10.08 |       0 |      10.08 |       NULL |
+|    3 | Daaga     |   43.54 |  7.8372 |    51.3772 |          2 |
+|    4 | Mugambo   |   43.56 |  7.8408 |    51.4008 |          2 |
+|    6 | Mohan     |    3.43 |       0 |       3.43 |       NULL |
+|    7 | Anuradha  |    4.32 |       0 |       4.32 |       NULL |
+|    8 | Suraj     |   11.45 |       0 |      11.45 |       NULL |
+|   11 | Ritu      | 5636.24 | 1014.52 |    6650.76 |      10000 |
++------+-----------+---------+---------+------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> update gks set child_feed=0 where child_feed= Null;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+---------+------------+------------+
+| sn   | name      | amount  | gst     | total_bill | child_feed |
++------+-----------+---------+---------+------------+------------+
+|    1 | anshika   |     5.5 |       0 |        5.5 |         -2 |
+|    2 | Ravi Teja |   10.08 |       0 |      10.08 |       NULL |
+|    3 | Daaga     |   43.54 |  7.8372 |    51.3772 |          2 |
+|    4 | Mugambo   |   43.56 |  7.8408 |    51.4008 |          2 |
+|    6 | Mohan     |    3.43 |       0 |       3.43 |       NULL |
+|    7 | Anuradha  |    4.32 |       0 |       4.32 |       NULL |
+|    8 | Suraj     |   11.45 |       0 |      11.45 |       NULL |
+|   11 | Ritu      | 5636.24 | 1014.52 |    6650.76 |      10000 |
++------+-----------+---------+---------+------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> update gks set child_feed=0 where child_feed= NULL;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+---------+------------+------------+
+| sn   | name      | amount  | gst     | total_bill | child_feed |
++------+-----------+---------+---------+------------+------------+
+|    1 | anshika   |     5.5 |       0 |        5.5 |         -2 |
+|    2 | Ravi Teja |   10.08 |       0 |      10.08 |       NULL |
+|    3 | Daaga     |   43.54 |  7.8372 |    51.3772 |          2 |
+|    4 | Mugambo   |   43.56 |  7.8408 |    51.4008 |          2 |
+|    6 | Mohan     |    3.43 |       0 |       3.43 |       NULL |
+|    7 | Anuradha  |    4.32 |       0 |       4.32 |       NULL |
+|    8 | Suraj     |   11.45 |       0 |      11.45 |       NULL |
+|   11 | Ritu      | 5636.24 | 1014.52 |    6650.76 |      10000 |
++------+-----------+---------+---------+------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> update gks set child_feed=0 where child_feed>-2 and child_feed<2;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+---------+------------+------------+
+| sn   | name      | amount  | gst     | total_bill | child_feed |
++------+-----------+---------+---------+------------+------------+
+|    1 | anshika   |     5.5 |       0 |        5.5 |         -2 |
+|    2 | Ravi Teja |   10.08 |       0 |      10.08 |       NULL |
+|    3 | Daaga     |   43.54 |  7.8372 |    51.3772 |          2 |
+|    4 | Mugambo   |   43.56 |  7.8408 |    51.4008 |          2 |
+|    6 | Mohan     |    3.43 |       0 |       3.43 |       NULL |
+|    7 | Anuradha  |    4.32 |       0 |       4.32 |       NULL |
+|    8 | Suraj     |   11.45 |       0 |      11.45 |       NULL |
+|   11 | Ritu      | 5636.24 | 1014.52 |    6650.76 |      10000 |
++------+-----------+---------+---------+------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> update gks set child_feed=0 where sn in(select * from gks where child_feed = Null);
+ERROR 1241 (21000): Operand should contain 1 column(s)
+mysql> selec t * from gks where child_feed =Null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selec t * from gks where child_feed =Null' at line 1
+mysql> selec t * from gks where child_feed ="Null";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selec t * from gks where child_feed ="Null"' at line 1
+mysql> select * from gks where child_feed =Null;
+Empty set (0.00 sec)
+
+mysql> update gks set child_feed=0 where sn in(2,6,7,8);
+Query OK, 4 rows affected (0.01 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> select * from gks;
++------+-----------+---------+---------+------------+------------+
+| sn   | name      | amount  | gst     | total_bill | child_feed |
++------+-----------+---------+---------+------------+------------+
+|    1 | anshika   |     5.5 |       0 |        5.5 |         -2 |
+|    2 | Ravi Teja |   10.08 |       0 |      10.08 |          0 |
+|    3 | Daaga     |   43.54 |  7.8372 |    51.3772 |          2 |
+|    4 | Mugambo   |   43.56 |  7.8408 |    51.4008 |          2 |
+|    6 | Mohan     |    3.43 |       0 |       3.43 |          0 |
+|    7 | Anuradha  |    4.32 |       0 |       4.32 |          0 |
+|    8 | Suraj     |   11.45 |       0 |      11.45 |          0 |
+|   11 | Ritu      | 5636.24 | 1014.52 |    6650.76 |      10000 |
++------+-----------+---------+---------+------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> -- aggregate (sum(),min(),max(),avg(),distinct(),count())
+mysql> -- sum() : sum of all the values of a column where values are either integer or float
+mysql> -- min(): it find minimum values of a column where values are either integer of float
+mysql> -- max(): it find maximum values of a columng where values are either integer of float
+mysql> -- avg(): it find per head volumn of a columm where values are either integer or float
+mysql> -- distinct(): it find and return unique values of a column,it remove duplicate values
+mysql> -- count(): it simply count total number of record according to row used in a table
+mysql> select * from gks;
++------+-----------+---------+---------+------------+------------+
+| sn   | name      | amount  | gst     | total_bill | child_feed |
++------+-----------+---------+---------+------------+------------+
+|    1 | anshika   |     5.5 |       0 |        5.5 |         -2 |
+|    2 | Ravi Teja |   10.08 |       0 |      10.08 |          0 |
+|    3 | Daaga     |   43.54 |  7.8372 |    51.3772 |          2 |
+|    4 | Mugambo   |   43.56 |  7.8408 |    51.4008 |          2 |
+|    6 | Mohan     |    3.43 |       0 |       3.43 |          0 |
+|    7 | Anuradha  |    4.32 |       0 |       4.32 |          0 |
+|    8 | Suraj     |   11.45 |       0 |      11.45 |          0 |
+|   11 | Ritu      | 5636.24 | 1014.52 |    6650.76 |      10000 |
++------+-----------+---------+---------+------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select sum(total_bill) from gks;
++-------------------+
+| sum(total_bill)   |
++-------------------+
+| 6788.318745851517 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(total_bill) as total_amount from gks;
++-------------------+
+| total_amount      |
++-------------------+
+| 6788.318745851517 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(total_bill) from gks;
++-------------------+
+| avg(total_bill)   |
++-------------------+
+| 848.5398432314396 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(total_bill) as average from gks;
++-------------------+
+| average           |
++-------------------+
+| 848.5398432314396 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from gks;
++------+-----------+---------+---------+------------+------------+
+| sn   | name      | amount  | gst     | total_bill | child_feed |
++------+-----------+---------+---------+------------+------------+
+|    1 | anshika   |     5.5 |       0 |        5.5 |         -2 |
+|    2 | Ravi Teja |   10.08 |       0 |      10.08 |          0 |
+|    3 | Daaga     |   43.54 |  7.8372 |    51.3772 |          2 |
+|    4 | Mugambo   |   43.56 |  7.8408 |    51.4008 |          2 |
+|    6 | Mohan     |    3.43 |       0 |       3.43 |          0 |
+|    7 | Anuradha  |    4.32 |       0 |       4.32 |          0 |
+|    8 | Suraj     |   11.45 |       0 |      11.45 |          0 |
+|   11 | Ritu      | 5636.24 | 1014.52 |    6650.76 |      10000 |
++------+-----------+---------+---------+------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select min(total_bill) as average from gks;
++---------+
+| average |
++---------+
+|    3.43 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select min(total_bill) from gks;
++-----------------+
+| min(total_bill) |
++-----------------+
+|            3.43 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from gks where total_bill in (select min(total_bill) from gks);
++------+-------+--------+------+------------+------------+
+| sn   | name  | amount | gst  | total_bill | child_feed |
++------+-------+--------+------+------------+------------+
+|    6 | Mohan |   3.43 |    0 |       3.43 |          0 |
++------+-------+--------+------+------------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from gks where total_bill in (select max(total_bill) from gks);
++------+------+---------+---------+------------+------------+
+| sn   | name | amount  | gst     | total_bill | child_feed |
++------+------+---------+---------+------------+------------+
+|   11 | Ritu | 5636.24 | 1014.52 |    6650.76 |      10000 |
++------+------+---------+---------+------------+------------+
+1 row in set (0.00 sec)
+
+mysql> select count(total_bill) from gks;
++-------------------+
+| count(total_bill) |
++-------------------+
+|                 8 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select count(sn) from gks;
++-----------+
+| count(sn) |
++-----------+
+|         8 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql>

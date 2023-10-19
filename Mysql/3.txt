@@ -1,0 +1,330 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> -- wildcard, alies, where, and , or, joins(left join , right join, inner join, full join/ full outer join)
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| wd12               |
+| wd2                |
+| wd5                |
+| wd7                |
+| we10               |
+| we2                |
+| we4                |
+| world              |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql> use we4;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_we4 |
++---------------+
+| gks           |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select * from gks;
++------+-----------+---------+---------+------------+------------+
+| sn   | name      | amount  | gst     | total_bill | child_feed |
++------+-----------+---------+---------+------------+------------+
+|    1 | anshika   |     5.5 |       0 |        5.5 |         -2 |
+|    2 | Ravi Teja |   10.08 |       0 |      10.08 |          0 |
+|    3 | Daaga     |   43.54 |  7.8372 |    51.3772 |          2 |
+|    4 | Mugambo   |   43.56 |  7.8408 |    51.4008 |          2 |
+|    6 | Mohan     |    3.43 |       0 |       3.43 |          0 |
+|    7 | Anuradha  |    4.32 |       0 |       4.32 |          0 |
+|    8 | Suraj     |   11.45 |       0 |      11.45 |          0 |
+|   11 | Ritu      | 5636.24 | 1014.52 |    6650.76 |      10000 |
++------+-----------+---------+---------+------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> create table college(enrollment int primary key auto_increment,Name varchar(40),Branch varchar(40));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table hostel(enroll int primary key auto_increment, room int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into college values(1,"a","MCA");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from college;
++------------+------+--------+
+| enrollment | Name | Branch |
++------------+------+--------+
+|          1 | a    | MCA    |
++------------+------+--------+
+1 row in set (0.00 sec)
+
+mysql> insert into college(name, branch) values("b","CA"),("d","MA"),("e","BCA"),("f","MCA");
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from college;
++------------+------+--------+
+| enrollment | Name | Branch |
++------------+------+--------+
+|          1 | a    | MCA    |
+|          2 | b    | CA     |
+|          3 | d    | MA     |
+|          4 | e    | BCA    |
+|          5 | f    | MCA    |
++------------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> insert into college values(11,"f","B com.");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from college;
++------------+------+--------+
+| enrollment | Name | Branch |
++------------+------+--------+
+|          1 | a    | MCA    |
+|          2 | b    | CA     |
+|          3 | d    | MA     |
+|          4 | e    | BCA    |
+|          5 | f    | MCA    |
+|         11 | f    | B com. |
++------------+------+--------+
+6 rows in set (0.00 sec)
+
+mysql> insert into college(name,branch) values("f","B com.");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from college;
++------------+------+--------+
+| enrollment | Name | Branch |
++------------+------+--------+
+|          1 | a    | MCA    |
+|          2 | b    | CA     |
+|          3 | d    | MA     |
+|          4 | e    | BCA    |
+|          5 | f    | MCA    |
+|         11 | f    | B com. |
+|         12 | f    | B com. |
++------------+------+--------+
+7 rows in set (0.00 sec)
+
+mysql> insert into hostel values(2,202),(3,302),(4,203),(5,324);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from hostel;
++--------+------+
+| enroll | room |
++--------+------+
+|      2 |  202 |
+|      3 |  302 |
+|      4 |  203 |
+|      5 |  324 |
++--------+------+
+4 rows in set (0.00 sec)
+
+mysql> insert into hostel values(20,505);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from hostel;
++--------+------+
+| enroll | room |
++--------+------+
+|      2 |  202 |
+|      3 |  302 |
+|      4 |  203 |
+|      5 |  324 |
+|     20 |  505 |
++--------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from college;
++------------+------+--------+
+| enrollment | Name | Branch |
++------------+------+--------+
+|          1 | a    | MCA    |
+|          2 | b    | CA     |
+|          3 | d    | MA     |
+|          4 | e    | BCA    |
+|          5 | f    | MCA    |
+|         11 | f    | B com. |
+|         12 | f    | B com. |
++------------+------+--------+
+7 rows in set (0.00 sec)
+
+mysql> select * from hostel;
++--------+------+
+| enroll | room |
++--------+------+
+|      2 |  202 |
+|      3 |  302 |
+|      4 |  203 |
+|      5 |  324 |
+|     20 |  505 |
++--------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from college inner join hostel on college.enrollment=hostel.enroll;
++------------+------+--------+--------+------+
+| enrollment | Name | Branch | enroll | room |
++------------+------+--------+--------+------+
+|          2 | b    | CA     |      2 |  202 |
+|          3 | d    | MA     |      3 |  302 |
+|          4 | e    | BCA    |      4 |  203 |
+|          5 | f    | MCA    |      5 |  324 |
++------------+------+--------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select college.enrollment,college.name, college.branch,hostel.room from college inner join hostel on college.enrollment=hostel.enroll;
++------------+------+--------+------+
+| enrollment | name | branch | room |
++------------+------+--------+------+
+|          2 | b    | CA     |  202 |
+|          3 | d    | MA     |  302 |
+|          4 | e    | BCA    |  203 |
+|          5 | f    | MCA    |  324 |
++------------+------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select c.enrollment,c.name, c.branch,h.room from college as c inner join hostel as h on c.enrollment=h.enroll;
++------------+------+--------+------+
+| enrollment | name | branch | room |
++------------+------+--------+------+
+|          2 | b    | CA     |  202 |
+|          3 | d    | MA     |  302 |
+|          4 | e    | BCA    |  203 |
+|          5 | f    | MCA    |  324 |
++------------+------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select c.enrollment,c.name, c.branch,h.room from college as c left join hostel as h on c.enrollment=h.enroll;
++------------+------+--------+------+
+| enrollment | name | branch | room |
++------------+------+--------+------+
+|          1 | a    | MCA    | NULL |
+|          2 | b    | CA     |  202 |
+|          3 | d    | MA     |  302 |
+|          4 | e    | BCA    |  203 |
+|          5 | f    | MCA    |  324 |
+|         11 | f    | B com. | NULL |
+|         12 | f    | B com. | NULL |
++------------+------+--------+------+
+7 rows in set (0.00 sec)
+
+mysql> select c.enrollment,c.name, c.branch,h.room from college as c right join hostel as h on c.enrollment=h.enroll;
++------------+------+--------+------+
+| enrollment | name | branch | room |
++------------+------+--------+------+
+|          2 | b    | CA     |  202 |
+|          3 | d    | MA     |  302 |
+|          4 | e    | BCA    |  203 |
+|          5 | f    | MCA    |  324 |
+|       NULL | NULL | NULL   |  505 |
++------------+------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> select c.enrollment,c.name, c.branch,h.room from college as c right join hostel as h on c.enrollment=h.enroll union select c.enrollment,c.name,c.branch,h.room from college as c left join hostel as h on c.enrollment=h.enroll;
++------------+------+--------+------+
+| enrollment | name | branch | room |
++------------+------+--------+------+
+|          2 | b    | CA     |  202 |
+|          3 | d    | MA     |  302 |
+|          4 | e    | BCA    |  203 |
+|          5 | f    | MCA    |  324 |
+|       NULL | NULL | NULL   |  505 |
+|          1 | a    | MCA    | NULL |
+|         11 | f    | B com. | NULL |
+|         12 | f    | B com. | NULL |
++------------+------+--------+------+
+8 rows in set (0.00 sec)
+
+mysql> -- foreign key,composite key
+mysql> create table UniversityPoly(enrollment varchar(6) primary key,name varchar(50) not null,branch varchar(30) not null);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table RMHall(enroll varchar(6) primary key,room varchar(10),foreign key(enroll), references UniversityPoly(enrollment));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', references UniversityPoly(enrollment))' at line 1
+mysql> create table RMHall(enroll varchar(6) primary key,room varchar(10),foreign key(enroll) references UniversityPoly(enrollment));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into UniversityPoly values("GI2556","Krishna Kumar","Mechanical engineering production");
+ERROR 1406 (22001): Data too long for column 'branch' at row 1
+mysql>
+mysql> insert into UniversityPoly values("GI2556","Krishna Kumar","DPPE");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into UniversityPoly values("GI2557"," Zaid","DPPE");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into UniversityPoly values("GI2558","Danish","RAC");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from UniversityPoly;
++------------+---------------+--------+
+| enrollment | name          | branch |
++------------+---------------+--------+
+| GI2556     | Krishna Kumar | DPPE   |
+| GI2557     |  Zaid         | DPPE   |
+| GI2558     | Danish        | RAC    |
++------------+---------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> insert into RMHall values("GI2510","A31");
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`we4`.`rmhall`, CONSTRAINT `rmhall_ibfk_1` FOREIGN KEY (`enroll`) REFERENCES `universitypoly` (`enrollment`))
+mysql> insert into RMHall values("GI2556","A31");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into RMHall values("GI2557","A31");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from RMHAll;
++--------+------+
+| enroll | room |
++--------+------+
+| GI2556 | A31  |
+| GI2557 | A31  |
++--------+------+
+2 rows in set (0.00 sec)
+
+mysql> -- composite key
+mysql> create table India(name varchar(50),father varchar(50),mother varchar(50),Location varchar(50), primary key(name,father,mother,location));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into India values("Krishna kumar","Sunil Kumar","Suman Devi","Ballia, UP");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into India values("Vishnu kumar","Sunil Kumar","Suman Devi","Ballia, UP");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into India values("Krishna","Rahul","Rita","Ballia, UP");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into India values("Krishna kumar","Sunil Kumar","Suman Devi","Ballia, UP");
+ERROR 1062 (23000): Duplicate entry 'Krishna kumar-Sunil Kumar-Suman Devi-Ballia, UP' for key 'india.PRIMARY'
+mysql> desc India;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| name     | varchar(50) | NO   | PRI | NULL    |       |
+| father   | varchar(50) | NO   | PRI | NULL    |       |
+| mother   | varchar(50) | NO   | PRI | NULL    |       |
+| Location | varchar(50) | NO   | PRI | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql>
